@@ -25,7 +25,7 @@ public class ProveedorService {
     }
 
     public List<Proveedor> buscarPorNombreOContacto(String criterio) {
-        return proveedorRepository.findByNombreContainingIgnoreCaseOrContactoContainingIgnoreCase(criterio, criterio);
+        return proveedorRepository.findByNombreContainingIgnoreCaseOrTelefonoContainingIgnoreCase(criterio, criterio);
     }
 
   @Transactional
