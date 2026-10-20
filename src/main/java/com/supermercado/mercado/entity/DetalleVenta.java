@@ -1,6 +1,8 @@
 package com.supermercado.mercado.entity;
 
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -27,10 +29,10 @@ public class DetalleVenta {
     private Integer cantidad;
 
     @Column(name = "precio_unitario", nullable = false)
-    private Double precioUnitario;
+    private BigDecimal precioUnitario;
 
     @Column(nullable = false)
-    private Double subtotal;
+    private BigDecimal subtotal;
 
     @ManyToOne 
     @JoinColumn(name = "venta_id", nullable = false)

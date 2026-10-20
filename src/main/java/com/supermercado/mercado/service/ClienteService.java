@@ -30,8 +30,11 @@ public class ClienteService {
 
     @Transactional
     public Cliente guardar(Cliente cliente) {
-        if (cliente.getEmail() == null || cliente.getEmail().isBlank()) {
-            throw new IllegalArgumentException("El email del cliente es obligatorio.");
+        if (cliente.getNombre() == null || cliente.getNombre().isBlank()) {
+            throw new IllegalArgumentException("El nombre del cliente es obligatorio.");
+        }
+        if (cliente.getDocumento() == null || cliente.getDocumento().isBlank()) {
+            throw new IllegalArgumentException("El documento del cliente es obligatorio.");
         }
         return clienteRepository.save(cliente);
     }
@@ -40,15 +43,16 @@ public class ClienteService {
     public Cliente actualizar(Long id, Cliente clienteDetalles) {
         Cliente clienteExistente = obtenerPorId(id);
 
-        if (clienteDetalles.getEmail() == null || clienteDetalles.getEmail().isBlank()) {
-            throw new IllegalArgumentException("El email del cliente es obligatorio.");
+        if (clienteDetalles.getNombre() == null || clienteDetalles.getNombre().isBlank()) {
+            throw new IllegalArgumentException("El nombre del cliente es obligatorio.");
+        }
+        if (clienteDetalles.getDocumento() == null || clienteDetalles.getDocumento().isBlank()) {
+            throw new IllegalArgumentException("El documento del cliente es obligatorio.");
         }
 
         clienteExistente.setNombre(clienteDetalles.getNombre());
-        clienteExistente.setApellido(clienteDetalles.getApellido());
-        clienteExistente.setEmail(clienteDetalles.getEmail());
+        clienteExistente.setDocumento(clienteDetalles.getDocumento());
         clienteExistente.setTelefono(clienteDetalles.getTelefono());
-        clienteExistente.setDireccion(clienteDetalles.getDireccion());
 
         return clienteRepository.save(clienteExistente);
     }

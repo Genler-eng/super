@@ -20,7 +20,7 @@ public class VentaController {
 
     @GetMapping
     public ResponseEntity<List<VentaResponseDTO>> obtenerTodas() {
-        return ResponseEntity.ok(ventaService.obtenertodas());
+        return ResponseEntity.ok(ventaService.obtenerTodas());
     }
 
     @GetMapping("/{id}")

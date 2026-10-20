@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -57,9 +58,9 @@ public class VentaService {
 
         venta.setDetalles(detalles);
 
-        double totalVenta = detalles.stream()
-                .mapToDouble(DetalleVenta::getSubtotal)
-                .sum();
+        BigDecimal totalVenta = detalles.stream()
+                .map(DetalleVenta::getSubtotal)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         venta.setTotal(totalVenta);
 
@@ -84,30 +85,30 @@ public class VentaService {
         detalle.setProducto(producto);
         detalle.setCantidad(detalleDTO.getCantidad());
         detalle.setPrecioUnitario(producto.getPrecio());
-        detalle.setSubtotal(producto.getPrecio() * detalleDTO.getCantidad());
+       detalle.setSubtotal(producto.getPrecio().multiply(BigDecimal.valueOf(detalleDTO.getCantidad())));
 
         return detalle;
     }
 
-    private VentaResponseDTO mapearAVentaResponseDTO(Venta venta) {
-        List<DetalleVentaResponseDTO> detallesDTO = venta.getDetalles().stream()
-                .map(detalle -> new DetalleVentaResponseDTO(
-                        detalle.getId(),
-                        detalle.getProducto().getId(),
-                        detalle.getProducto().getNombre(),
-                        detalle.getCantidad(),
-                        detalle.getPrecioUnitario(),
-                        detalle.getSubtotal()
-                ))
-                .toList();
+private VentaResponseDTO mapearAVentaResponseDTO(Venta venta) {
+    List<DetalleVentaResponseDTO> detallesDTO = venta.getDetalles().stream()
+            .map(detalle -> new DetalleVentaResponseDTO(
+                    detalle.getId(),
+                    detalle.getProducto().getId(),
+                    detalle.getProducto().getNombre(),
+                    detalle.getCantidad(),
+                    detalle.getPrecioUnitario().doubleValue(), // Convertido a Double si el DTO lo pide
+                    detalle.getSubtotal().doubleValue()         // Convertido a Double si el DTO lo pide
+            ))
+            .toList();
 
-        return new VentaResponseDTO(
-                venta.getId(),
-                venta.getFecha(),
-                venta.getCliente().getId(),
-                venta.getCliente().getNombre(),
-                venta.getTotal(),
-                detallesDTO
-        );
-    }
+    return new VentaResponseDTO(
+            venta.getId(),
+            venta.getFecha(),
+            venta.getCliente().getId(),
+            venta.getCliente().getNombre(),
+            venta.getTotal().doubleValue(), // Convertido a Double si el DTO lo pide
+            detallesDTO
+    );
+}
 }

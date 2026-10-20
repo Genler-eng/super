@@ -24,9 +24,9 @@ public class CategoriaService {
                 .orElseThrow(() -> new ResourceNotFoundException("Categoría no encontrada con ID: " + id));
     }
 
-    // Uso de stream().map().toList() para transformar entidades a lista de nombres
     public List<String> obtenerNombresCategorias() {
-        return categoriaRepository.findAll().stream()
+        return categoriaRepository.findAll()
+                .stream()
                 .map(Categoria::getNombre)
                 .toList();
     }

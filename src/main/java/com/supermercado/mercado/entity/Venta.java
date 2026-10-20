@@ -1,6 +1,7 @@
 package com.supermercado.mercado.entity;
 
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -33,7 +34,7 @@ public class Venta {
     private LocalDateTime fecha;
 
     @Column(nullable = false, precision = 12, scale = 2)
-    private Double total;
+    private BigDecimal total;
 
     @ManyToOne
     @JoinColumn(name = "cliente_id", nullable = false)

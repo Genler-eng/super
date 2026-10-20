@@ -28,14 +28,13 @@ public class ProveedorService {
         return proveedorRepository.findByNombreContainingIgnoreCaseOrContactoContainingIgnoreCase(criterio, criterio);
     }
 
-    @Transactional
-    public Proveedor guardar(Proveedor proveedor) {
-        if (proveedor.getNombre() == null || proveedor.getNombre().isBlank()) {
-            // CORREGIDO: Se quitó el "s:" que sobraba
-            throw new IllegalArgumentException("El nombre del proveedor no puede estar vacío.");
-        }
-        return proveedorRepository.save(proveedor);
+  @Transactional
+public Proveedor guardar(Proveedor proveedor) {
+    if (proveedor.getNombre() == null || proveedor.getNombre().isBlank()) {
+        throw new IllegalArgumentException("El nombre del proveedor no puede estar vacío.");
     }
+    return proveedorRepository.save(proveedor);
+}
 
     @Transactional
     public Proveedor actualizar(Long id, Proveedor proveedorDetalles) {

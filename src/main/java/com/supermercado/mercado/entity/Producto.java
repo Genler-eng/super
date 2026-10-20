@@ -1,6 +1,8 @@
 package com.supermercado.mercado.entity;
 
 
+import java.math.BigDecimal;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,7 +30,7 @@ public class Producto {
     private String nombre;
 
     @Column(nullable = false)
-    private Double precio;
+    private BigDecimal precio;
 
     @Column(nullable = false)
     private Integer stock;

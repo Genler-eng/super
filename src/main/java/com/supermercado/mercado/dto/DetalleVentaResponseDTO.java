@@ -1,8 +1,12 @@
 package com.supermercado.mercado.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data 
+@NoArgsConstructor 
+@AllArgsConstructor 
 public class DetalleVentaResponseDTO {
     private Long id;
     private Long productoId;

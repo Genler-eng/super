@@ -21,6 +21,7 @@ public class ProductoService {
     private final ProductoRepository productoRepository;
     private final CategoriaRepository categoriaRepository;
   private final ProveedorRepository proveedorRepository;
+  
     public List<Producto> obtenerTodos() {
         return productoRepository.findAll();
     }
