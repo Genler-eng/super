@@ -97,8 +97,8 @@ private VentaResponseDTO mapearAVentaResponseDTO(Venta venta) {
                     detalle.getProducto().getId(),
                     detalle.getProducto().getNombre(),
                     detalle.getCantidad(),
-                    detalle.getPrecioUnitario().doubleValue(), // Convertido a Double si el DTO lo pide
-                    detalle.getSubtotal().doubleValue()         // Convertido a Double si el DTO lo pide
+                    detalle.getPrecioUnitario().doubleValue(), 
+                    detalle.getSubtotal().doubleValue()         
             ))
             .toList();
 
@@ -107,7 +107,7 @@ private VentaResponseDTO mapearAVentaResponseDTO(Venta venta) {
             venta.getFecha(),
             venta.getCliente().getId(),
             venta.getCliente().getNombre(),
-            venta.getTotal().doubleValue(), // Convertido a Double si el DTO lo pide
+            venta.getTotal().doubleValue(), 
             detallesDTO
     );
 }

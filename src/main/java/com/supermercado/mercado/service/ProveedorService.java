@@ -41,7 +41,6 @@ public Proveedor guardar(Proveedor proveedor) {
         Proveedor proveedorExistente = obtenerPorId(id);
 
         if (proveedorDetalles.getNombre() == null || proveedorDetalles.getNombre().isBlank()) {
-            // CORREGIDO: Se quitó el "s:" que sobraba
             throw new IllegalArgumentException("El nombre del proveedor no puede estar vacío.");
         }
 
